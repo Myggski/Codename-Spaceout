@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="Dialogue-style.uss" />
+    <ui:VisualElement name="dialogue" class="dialogue">
+        <ui:VisualElement name="dialogue-wrapper" class="dialogue-wrapper" style="height: 114px; max-height: 114px;">
+            <ui:VisualElement name="dialogue-box" usage-hints="None" enable-rich-text="true" display-tooltip-when-elided="true" focusable="false" text="General: I understand that you&apos;ve" class="dialogue-box" style="max-height: 114px; padding-left: 18px; padding-right: 18px;">
+                <ui:Label display-tooltip-when-elided="true" name="hidden-text" class="hidden-text" />
+                <ui:Label display-tooltip-when-elided="true" name="visible-text" class="visible-text" style="top: 8px; left: 18px;" />
+                <ui:VisualElement name="dialogue-close" style="background-image: url(&apos;/Assets/Sprites/UI/dialogue-close.png#dialogue-close&apos;); width: 9px; height: 9px; position: absolute; bottom: 6px; right: 7px; opacity: 0;" />
+                <ui:VisualElement name="dialogue-more" style="background-image: url(&apos;/Assets/Sprites/UI/dialogue-more.png#dialogue-more&apos;); width: 9px; height: 9px; position: absolute; bottom: 6px; right: 7px; opacity: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

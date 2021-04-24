@@ -1,0 +1,15 @@
+.heart-icon {
+    background-image: url('/Assets/Sprites/UI/heart-ui.png#heart-ui');
+    width: 14px;
+    height: 14px;
+    margin-left: 0;
+    margin-right: 4px;
+}
+
+.health-bar {
+    margin-top: 8px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}

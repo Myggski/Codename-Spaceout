@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b62465155ffc7c4cacbf2e91993a012, type: 3}
+  m_Name: Small Robot Idle Animation Model
+  m_EditorClassIdentifier: 
+  Min: 30
+  Max: 75
+  defaultAnimation: {fileID: 7400000, guid: 210a5ae65494b414f94c87cb3a1ae1ba, type: 2}
+  animationVariants:
+  - Min: 6
+    Max: 8
+    animationClip: {fileID: 7400000, guid: 178aab047e6894b4bac41d2584aa9090, type: 2}
+  - Min: 1
+    Max: 1
+    animationClip: {fileID: 7400000, guid: 45f9602473e8a2a45bfb290d03aa5151, type: 2}
+  - Min: 2
+    Max: 4
+    animationClip: {fileID: 7400000, guid: fa49dc4ea979b5e4e93731e9a239f306, type: 2}
