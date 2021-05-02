@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="GameOver.uss" />
+    <ui:VisualElement name="game-over-wrapper" style="left: 0; top: 0; right: 0; bottom: 0; width: 100%; height: 100%;">
+        <ui:VisualElement name="game-over-shadow" style="width: 100%; height: 100%; background-color: rgba(45, 33, 46, 0.64); border-bottom-width: 0; border-bottom-color: rgb(255, 255, 255); padding-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0;">
+            <ui:VisualElement name="game-over-content" style="margin-top: 64px; justify-content: center; align-items: center; width: 172px; margin-left: auto; margin-right: auto;">
+                <ui:VisualElement name="game-over-icon" style="background-image: url(&apos;/Assets/Sprites/UI/game-over-ui.png#game-over-ui&apos;); width: 172px; height: 24px; margin-left: auto; margin-right: auto; margin-top: 0; margin-bottom: 16px;" />
+                <ui:VisualElement name="mission-wrapper" style="width: 100%; margin-left: 0; margin-right: 0; padding-left: 16px; flex-direction: row; justify-content: space-between; padding-right: 16px; border-bottom-width: 0; border-bottom-color: rgba(255, 255, 255, 255); padding-bottom: 4px; margin-bottom: -4px; border-left-width: 0; border-right-width: 0; border-top-width: 0;">
+                    <ui:Label text="Mission:&#10;" display-tooltip-when-elided="true" name="mission-label" class="text" style="-unity-text-align: upper-left;" />
+                    <ui:Label text="Success" display-tooltip-when-elided="true" name="mission-text" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="time-wrapper" style="width: 100%; margin-left: 0; margin-right: 0; padding-left: 16px; flex-direction: row; justify-content: space-between; padding-right: 16px; padding-top: 8px; border-top-width: 1px; border-left-color: rgba(255, 255, 255, 255); border-right-color: rgba(255, 255, 255, 255); border-top-color: rgba(255, 255, 255, 255); border-bottom-color: rgba(255, 255, 255, 255); -unity-text-align: middle-left;">
+                    <ui:Label text="Time: " display-tooltip-when-elided="true" name="time-label" class="text" />
+                    <ui:Label text="00:00:000" display-tooltip-when-elided="true" name="time-text" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="kills-wrapper" style="width: 100%; margin-left: 0; margin-right: 0; padding-left: 16px; flex-direction: row; justify-content: space-between; padding-right: 16px; border-top-width: 0; border-bottom-color: rgb(255, 255, 255); border-bottom-width: 0;">
+                    <ui:Label text="Kills:&#10;" display-tooltip-when-elided="true" name="kills-label" class="text" />
+                    <ui:Label text="0&#10;" display-tooltip-when-elided="true" name="kills-text" class="text" />
+                </ui:VisualElement>
+                <ui:Button display-tooltip-when-elided="true" name="retry-button" class="menu-button retry-button" style="margin-top: 8px;" />
+                <ui:Button display-tooltip-when-elided="true" name="quit-button" class="menu-button quit-button" style="background-color: rgba(88, 88, 88, 0);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -9,5 +9,6 @@ public interface IEntity
 
   GameObject gameObject { get; }
 
+  void DealDamage(float damage);
   void DealDamage(float damage, Vector2 hitFromPosition);
 }

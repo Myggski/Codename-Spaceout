@@ -17,7 +17,7 @@ public class NodeGrid : Singleton<NodeGrid>
 
   public Node[,] Grid => this.nodeGrid;
 
-  private void Awake()
+  private void OnEnable()
   {
     this.Setup();
   }

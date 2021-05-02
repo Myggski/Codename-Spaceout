@@ -5,12 +5,15 @@ using UnityEngine;
 /// </summary>
 public class EnemyMover : Mover
 {
-  [SerializeField]
-  private AnimationClip idleAnimation;
-  [SerializeField]
-  private AnimationClip runningAnimation;
-
   private Animator animator;
+
+  private void Update()
+  {
+    if (!this.rb2d.isKinematic)
+    {
+      this.rb2d.velocity = Vector2.zero;
+    }
+  }
 
   protected override void SetMoreComponents()
   {
@@ -19,9 +22,10 @@ public class EnemyMover : Mover
 
   protected void Run(Vector3 targetPosition)
   {
-    if (this.runningAnimation != null && this.animator != null && !this.animator.GetCurrentAnimatorStateInfo(0).IsName(this.runningAnimation.name))
+    if (this.animator != null && !this.animator.GetBool("Running"))
     {
-      this.animator.Play(this.runningAnimation.name);
+      this.animator.SetBool("Running", true);
+      this.rb2d.isKinematic = false;
     }
 
     MoveTowards(targetPosition);
@@ -29,7 +33,12 @@ public class EnemyMover : Mover
 
   protected void Idle()
   {
-    this.animator.Play(this.idleAnimation.name);
+    if (this.animator.GetBool("Running"))
+    {
+      this.animator.SetBool("Running", false);
+      this.rb2d.velocity = Vector2.zero;
+      this.rb2d.isKinematic = true;
+    }
   }
 
   private void OnDrawGizmos()

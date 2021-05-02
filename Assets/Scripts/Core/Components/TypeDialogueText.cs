@@ -5,11 +5,12 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+[
+  RequireComponent(typeof(UIDocument)),
+  RequireComponent(typeof(AudioSource))
+]
 public class TypeDialogueText : MonoBehaviour
 {
-  [SerializeField]
-  private StringRuntimeSet dialogueTexts;
-
   [SerializeField]
   [Tooltip("The duration of the display/hide effect")]
   private float displayDurationTime;
@@ -23,24 +24,23 @@ public class TypeDialogueText : MonoBehaviour
   [SerializeField]
   [Tooltip("Triggers when dialogue has closed")]
   private UnityEvent dialogueClosed;
-
+  [SerializeField]
+  [Tooltip("The text to display in the dialogue")]
+  private StringRuntimeSet dialogueTexts;
   private VisualElement dialogue;
   private VisualElement dialogueBox;
   private VisualElement dialogueMoreIcon;
   private VisualElement dialogueCloseIcon;
-
   private Label visibleText;
   private Label hiddenText;
-
   private AudioSource typingSound;
+  private UIDocument document;
+  private Coroutine typingCoroutine;
+  private List<string> queuedDialogue = new List<string>();
   private string currentMessage;
   private float dialogueDisplayEffectTimer;
   private float dialogueStartPosition;
   private bool isOpen;
-  private Coroutine typingCoroutine;
-
-  private List<string> queuedDialogue = new List<string>();
-
 
   private void Awake()
   {
@@ -56,6 +56,7 @@ public class TypeDialogueText : MonoBehaviour
   private void SetComponents()
   {
     this.typingSound = GetComponent<AudioSource>();
+    this.document = GetComponent<UIDocument>();
   }
 
   /// <summary>
@@ -65,7 +66,7 @@ public class TypeDialogueText : MonoBehaviour
   /// </summary>
   private void Setup()
   {
-    this.dialogue = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("dialogue");
+    this.dialogue = this.document.rootVisualElement.Q<VisualElement>("dialogue");
     this.dialogueBox = this.dialogue.Q<VisualElement>("dialogue-box");
     this.dialogueCloseIcon = this.dialogue.Q<VisualElement>("dialogue-close");
     this.dialogueMoreIcon = this.dialogue.Q<VisualElement>("dialogue-more");
@@ -143,7 +144,7 @@ public class TypeDialogueText : MonoBehaviour
   {
     if (this.typingSound != null)
     {
-      this.typingSound.volume = 0.6f;
+      this.typingSound.volume = 0f;
       this.typingSound.Play();
     }
   }

@@ -11,21 +11,26 @@ public class FloatVariable : ScriptableObject
 
   public void SetValue(float value)
   {
-    Value = value;
+    this.Value = value;
   }
 
   public void SetValue(FloatVariable value)
   {
-    Value = value.Value;
+    this.Value = value.Value;
   }
 
   public void ApplyChange(float amount)
   {
-    Value += amount;
+    this.Value += amount;
   }
 
   public void ApplyChange(FloatVariable amount)
   {
-    Value += amount.Value;
+    this.Value += amount.Value;
+  }
+
+  public override string ToString()
+  {
+    return this.Value.ToString();
   }
 }

@@ -1,0 +1,12 @@
+.derp {
+    width: 50%;
+    height: 50%;
+    background-image: url('/Assets/Sprites/UI/retry-button-ui.png#retry-button-ui_0');
+}
+
+.derp:hover {
+    width: 50%;
+    height: 50%;
+    background-color: rgb(55, 0, 0);
+    background-image: url('/Assets/Sprites/UI/retry-button-ui.png#retry-button-ui_1');
+}

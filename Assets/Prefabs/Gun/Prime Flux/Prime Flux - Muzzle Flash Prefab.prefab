@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2090523023878377022}
   - component: {fileID: 718383491320178660}
   m_Layer: 0
-  m_Name: Blazer - Muzzle Flash Prefab
+  m_Name: Prime Flux - Muzzle Flash Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,4 +116,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b61c1632dcc984d9a59fcca8f7f71e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LifeTimeInSeconds: 0.25
+  lifeTimeInSeconds: 0.25

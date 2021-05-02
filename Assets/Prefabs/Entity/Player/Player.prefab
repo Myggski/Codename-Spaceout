@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1011550478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843380406870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b42e790880ca64a899c8e70fb0c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostEffectPrefab: {fileID: 339196979529960820, guid: 39d865aff431c734c8d18a5c95c4b11e, type: 3}
+  ghostDelay: 0.125
+--- !u!114 &1011550479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843380406870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8521700061b699046b4fb01791a8b119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshairPrefab: {fileID: 1331099725480727181, guid: 9c1e53ea26ed0d84bbbce7560045ca33, type: 3}
 --- !u!1 &1019894843428141102
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,7 +41,6 @@ GameObject:
   - component: {fileID: 1624466521}
   - component: {fileID: 1019894843428141096}
   - component: {fileID: 1019894843428141098}
-  - component: {fileID: 1019894843428141091}
   - component: {fileID: 1019894843428141117}
   - component: {fileID: 1019894843428141116}
   - component: {fileID: 1019894843428141090}
@@ -28,6 +54,14 @@ GameObject:
   - component: {fileID: 496678425}
   - component: {fileID: 1624466520}
   - component: {fileID: 1624466519}
+  - component: {fileID: 1578116204}
+  - component: {fileID: 1578116205}
+  - component: {fileID: 1578116223}
+  - component: {fileID: 683882005}
+  - component: {fileID: 683882026}
+  - component: {fileID: 683882027}
+  - component: {fileID: 683882028}
+  - component: {fileID: 683882029}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -180,19 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f9835f45f2194449dabf4470b6a19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1019894843428141091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1019894843428141102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ddc3da253a56684d91b2ab21386b530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dissolveMaterial: {fileID: 2100000, guid: 23647af8e798bb840a48d8897108796d, type: 2}
 --- !u!114 &1019894843428141117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +437,7 @@ MonoBehaviour:
   health:
     UseConstant: 1
     ConstantValue: 0
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 84f82df9b22109a4b81525d379860195, type: 2}
 --- !u!114 &496678423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b7ba44f3c6b5142892a7a26948325c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToSelect: {fileID: 0}
 --- !u!114 &496678425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,6 +489,238 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fakeShadowPrefab: {fileID: 5214080039601351247, guid: ec41a0c690c34dd4da3e911533270d40, type: 3}
   widthOffsetInPixels: 0
+--- !u!114 &1578116204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89152a1ba403ace45949e0f31606f71f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashTimer: 0.25
+  dashCooldown: 1
+  dashForce: 20
+  dashingAnimationParameterName: Dashing
+  startDashing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputListener, Assembly-CSharp
+        m_MethodName: DisableInputGroupTag
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: e2b09dd89ffee7e41a6dae0c35ac81ea, type: 2}
+          m_ObjectArgumentAssemblyTypeName: InputGroupTag, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1578116205}
+        m_TargetAssemblyTypeName: PlayerGhostEffect, Assembly-CSharp
+        m_MethodName: ToggleCreateGhosts
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  endDashing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputListener, Assembly-CSharp
+        m_MethodName: EnableInputGroupTag
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: e2b09dd89ffee7e41a6dae0c35ac81ea, type: 2}
+          m_ObjectArgumentAssemblyTypeName: InputGroupTag, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1578116205}
+        m_TargetAssemblyTypeName: PlayerGhostEffect, Assembly-CSharp
+        m_MethodName: ToggleCreateGhosts
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1578116205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b42e790880ca64a899c8e70fb0c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostEffectPrefab: {fileID: 339196979529960820, guid: 39d865aff431c734c8d18a5c95c4b11e, type: 3}
+  ghostDelay: 0.125
+--- !u!114 &1578116223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95765de61f9e87143bfb4259aab859a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d62e3cb171017d449d80d32fea2f5c8, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1578116204}
+        m_TargetAssemblyTypeName: PlayerDasher, Assembly-CSharp
+        m_MethodName: StartDashing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &683882005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbae1de6df42b1349bea19e07bde6000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 2100000, guid: 23647af8e798bb840a48d8897108796d, type: 2}
+  numberOfSeconds: 2
+--- !u!114 &683882026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913450469b1e5514a8151a4d1f2c0d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &683882027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95765de61f9e87143bfb4259aab859a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ad85e1e684475b34fb16a3f54c08e34b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 683882028}
+        m_TargetAssemblyTypeName: PlayerBlinkHit, Assembly-CSharp
+        m_MethodName: StartBlink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &683882028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d631d998c2bce1043b7ed5a25c3eda84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfBlinks: 6
+  delayBetweenBlinks: 0.125
+--- !u!114 &683882029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019894843428141102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95765de61f9e87143bfb4259aab859a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 31a53557657dcff428e026c6f967fab2, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerInputListener, Assembly-CSharp
+        m_MethodName: DisableInputGroupTag
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 460dab9402e2ad84ebbfe1750426f49f, type: 2}
+          m_ObjectArgumentAssemblyTypeName: InputGroupTag, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 683882028}
+        m_TargetAssemblyTypeName: PlayerBlinkHit, Assembly-CSharp
+        m_MethodName: StopBlink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 683882005}
+        m_TargetAssemblyTypeName: DissolveObjectOverTime, Assembly-CSharp
+        m_MethodName: StartDissolveOverTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &6180819309673430374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -539,6 +791,10 @@ PrefabInstance:
     - target: {fileID: 6620795711359592240, guid: faab35b851127a747903bc4e214535d5, type: 3}
       propertyPath: m_Name
       value: GunPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6620795711359592240, guid: faab35b851127a747903bc4e214535d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6620795711359592246, guid: faab35b851127a747903bc4e214535d5, type: 3}
       propertyPath: projectilePrefab

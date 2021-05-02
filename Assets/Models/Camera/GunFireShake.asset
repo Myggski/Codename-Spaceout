@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561ad549ca90d4f4587c03e66d8ff66f, type: 3}
   m_Name: GunFireShake
   m_EditorClassIdentifier: 
-  amplitude: 0.05
-  frequency: 0.05
+  amplitude: 0.25
+  frequency: 1
   duration: 0.1
   NoiseSettings: {fileID: 11400000, guid: 4746361bcd77af44aa81afe1248e5ef1, type: 2}

@@ -11,16 +11,18 @@ GameObject:
   - component: {fileID: 7574561347058865128}
   - component: {fileID: 7574561347058865129}
   - component: {fileID: 7574561347058865130}
-  - component: {fileID: 689670493}
+  - component: {fileID: 2285134342857631313}
   - component: {fileID: 7574561347058865134}
   - component: {fileID: 7574561347058865131}
-  - component: {fileID: 7574561347058865127}
   - component: {fileID: 7574561347058865126}
   - component: {fileID: 257069740642234055}
   - component: {fileID: 689670490}
   - component: {fileID: 689670494}
-  - component: {fileID: 689670481}
   - component: {fileID: 689670488}
+  - component: {fileID: 1189531452}
+  - component: {fileID: 1189531463}
+  - component: {fileID: 6290362050655760039}
+  - component: {fileID: -8514930513279569714}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -83,7 +85,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -4931728859652715966, guid: 1b52620e131b4b4468173f0452008908, type: 3}
+  m_Sprite: {fileID: 1222138555221784357, guid: d713a984a1ba9bd4aafb83faf4a54fdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,8 +117,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &689670493
-BoxCollider2D:
+--- !u!58 &2285134342857631313
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -129,18 +131,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.125}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.36363637}
-    oldSize: {x: 1, y: 1.375}
-    newSize: {x: 1, y: 1.3125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.875, y: 1.125}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!95 &7574561347058865134
 Animator:
   serializedVersion: 3
@@ -176,21 +168,6 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 90d3538d77cce3343bf0480146e2d3d3, type: 2}
-  idleAnimation: {fileID: 7400000, guid: 210a5ae65494b414f94c87cb3a1ae1ba, type: 2}
-  runningAnimation: {fileID: 7400000, guid: df87b8493d3117c40b3f88d7c2a288c8, type: 2}
-  target: {fileID: 0}
---- !u!114 &7574561347058865127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7574561347058865135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6dcc19237b7114e8adbcc3e6bca0ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7574561347058865126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +197,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 5e20df9ddf1718d4d9469f427ce537a5, type: 2}
+  enemyList: {fileID: 11400000, guid: 6b071addd9af3474d945a0b6ba391b0d, type: 2}
   DeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -235,9 +213,78 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  DamageTakenEvent:
-    m_PersistentCalls:
-      m_Calls:
+      - m_Target: {fileID: 1189531463}
+        m_TargetAssemblyTypeName: AddToCounter, Assembly-CSharp
+        m_MethodName: Add
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1189531452}
+        m_TargetAssemblyTypeName: DissolveObjectOverTime, Assembly-CSharp
+        m_MethodName: StartDissolveOverTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 689670490}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7574561347058865131}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7574561347058865131}
+        m_TargetAssemblyTypeName: EnemyUnit, Assembly-CSharp
+        m_MethodName: StopFollow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2285134342857631313}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 689670488}
         m_TargetAssemblyTypeName: BlinkOnHit, Assembly-CSharp
         m_MethodName: StartBlink
@@ -250,10 +297,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 689670481}
-        m_TargetAssemblyTypeName: KnockbackOnHit, Assembly-CSharp
-        m_MethodName: StartKnockback
-        m_Mode: 0
+      - m_Target: {fileID: 7574561347058865131}
+        m_TargetAssemblyTypeName: EnemyUnit, Assembly-CSharp
+        m_MethodName: StopFollow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7574561347058865130}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
+        m_MethodName: Sleep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -8514930513279569714}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DamageTakenEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 689670488}
+        m_TargetAssemblyTypeName: BlinkOnHit, Assembly-CSharp
+        m_MethodName: StartBlink
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -288,20 +374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b217f48bfdae8648aeb4751ae2c9811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &689670481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7574561347058865135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf5d139d66088c40af7c2789e2238b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackForce: 0.0125
-  knockbackDuration: 0.2
 --- !u!114 &689670488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,3 +390,59 @@ MonoBehaviour:
   numberOfBlinks: 1
   blinkTimer: 0.1
   delayBetweenBlinks: 0.1
+--- !u!114 &1189531452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574561347058865135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbae1de6df42b1349bea19e07bde6000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 2100000, guid: 23647af8e798bb840a48d8897108796d, type: 2}
+  numberOfSeconds: 1
+  disable: 0
+  dissolvedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1189531463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574561347058865135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82762b6460eb0d144aaf34ce03a76740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counter: {fileID: 11400000, guid: 363a791155b9271498b38e37218de441, type: 2}
+--- !u!114 &6290362050655760039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574561347058865135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1367dfebbd65d074bb3379c6c95bf181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyList: {fileID: 11400000, guid: 6b071addd9af3474d945a0b6ba391b0d, type: 2}
+--- !u!114 &-8514930513279569714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574561347058865135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b72ed259804d884dacc11b133adc07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

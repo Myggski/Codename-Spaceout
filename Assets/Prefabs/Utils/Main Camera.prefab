@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3713506828243657853}
   - component: {fileID: 3713506828243657850}
   - component: {fileID: 3713506828243657856}
-  - component: {fileID: 4827011973464178076}
+  - component: {fileID: 3713506828479814912}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
---- !u!114 &4827011973464178076
+--- !u!114 &3713506828479814912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,15 +197,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3713506828243657858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6238d3ec2cb6cc34eb718813cfac39ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fab1a171bf91e8429111de64c5986ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KeyActions:
-  - KeyCode: 115
-    InputKeyAction: {fileID: 11400000, guid: b455a0caba3291740aa569ee44fa19d4, type: 2}
-    KeyPressType: 0
+  keyActions:
   - KeyCode: 119
     InputKeyAction: {fileID: 11400000, guid: 14879b030c6a44d478661881411e406f, type: 2}
+    KeyPressType: 0
+  - KeyCode: 115
+    InputKeyAction: {fileID: 11400000, guid: b455a0caba3291740aa569ee44fa19d4, type: 2}
     KeyPressType: 0
   - KeyCode: 97
     InputKeyAction: {fileID: 11400000, guid: d175d80da21c8224bb72f05cc05d9547, type: 2}
@@ -213,12 +213,18 @@ MonoBehaviour:
   - KeyCode: 100
     InputKeyAction: {fileID: 11400000, guid: d01419846696c7c4e98a8d1250e632bf, type: 2}
     KeyPressType: 0
-  - KeyCode: 323
-    InputKeyAction: {fileID: 11400000, guid: 433324ee2fea8cd45b84d9f31bd6512f, type: 2}
-    KeyPressType: 0
   - KeyCode: 101
     InputKeyAction: {fileID: 11400000, guid: 55da5cdece97cf14bb074911df6b6170, type: 2}
     KeyPressType: 1
+  - KeyCode: 323
+    InputKeyAction: {fileID: 11400000, guid: 433324ee2fea8cd45b84d9f31bd6512f, type: 2}
+    KeyPressType: 0
+  - KeyCode: 323
+    InputKeyAction: {fileID: 11400000, guid: 767e88563dc461149924188df42388c4, type: 2}
+    KeyPressType: 1
+  - KeyCode: 324
+    InputKeyAction: {fileID: 11400000, guid: 30e63f081be35494ba7fba1bfff9fa6c, type: 2}
+    KeyPressType: 0
 --- !u!1 &3713506828958557701
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3713506829163445643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.977778, y: 3.3, z: 0}
+  m_LocalPosition: {x: -8.977777, y: 3.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3713506828958557698}

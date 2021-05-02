@@ -1,7 +1,5 @@
-using UnityEngine;
-
 /// <summary>
-/// This class has helping methods when working with pixels
+/// Helper-class that helps with pixel calculations
 /// </summary>
 public static class PixelHelper
 {

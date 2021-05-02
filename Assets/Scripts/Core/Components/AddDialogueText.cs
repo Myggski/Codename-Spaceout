@@ -10,11 +10,14 @@ public class AddDialogueText : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D other)
   {
-    foreach (string text in this.texts)
+    if (other.GetComponent<PlayerEntity>() != null)
     {
-      this.dialogueTexts.Add(text);
-    }
+      foreach (string text in this.texts)
+      {
+        this.dialogueTexts.Add(text);
+      }
 
-    this.gameObject.SetActive(false);
+      this.gameObject.SetActive(false);
+    }
   }
 }

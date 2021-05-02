@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 /// <summary>
 /// Event listener that can be added to a gameObject
-/// Calls a method when the event triggers
+/// Calls the connected methods when the event triggers
 /// </summary>
 public class GameEventListener : MonoBehaviour
 {

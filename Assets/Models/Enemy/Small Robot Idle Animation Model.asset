@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b62465155ffc7c4cacbf2e91993a012, type: 3}
   m_Name: Small Robot Idle Animation Model
   m_EditorClassIdentifier: 
-  Min: 30
-  Max: 75
+  Min: 5
+  Max: 25
   defaultAnimation: {fileID: 7400000, guid: 210a5ae65494b414f94c87cb3a1ae1ba, type: 2}
   animationVariants:
   - Min: 6

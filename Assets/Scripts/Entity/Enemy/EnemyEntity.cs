@@ -3,12 +3,24 @@ using UnityEngine.Events;
 
 public class EnemyEntity : Entity
 {
+  [SerializeField]
+  private GameObjectRuntimeSet enemyList;
   public UnityEvent DeathEvent;
   public UnityEvent<Vector2> DamageTakenEvent;
 
   private void Awake()
   {
     this.SetHealth();
+  }
+
+  private void OnEnable()
+  {
+    this.enemyList.Add(this.gameObject);
+  }
+
+  private void OnDestroy()
+  {
+    this.enemyList.RemoveById(this.gameObject.GetInstanceID());
   }
 
   private void SetHealth()
@@ -26,8 +38,9 @@ public class EnemyEntity : Entity
 
   protected override void Die(Vector2 hitFromPosition)
   {
-    this.Hit(hitFromPosition);
-    this.DeathEvent.Invoke();
-    //Destroy(gameObject);
+    if (this.DeathEvent != null)
+    {
+      this.DeathEvent.Invoke();
+    }
   }
 }

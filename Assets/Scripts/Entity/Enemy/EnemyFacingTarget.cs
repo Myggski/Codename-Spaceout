@@ -3,12 +3,13 @@ using UnityEngine;
 /// <summary>
 /// This component checks the gameObjects movement, if the direction changes, it flips the image
 /// </summary>
-public class EnemyFacingWalkDirection : MonoBehaviour
+public class EnemyFacingTarget : MonoBehaviour
 {
   private Vector3 previousPosition;
+  private GameObject target;
   private bool isFacingRight;
 
-  private void Start()
+  private void OnEnable()
   {
     this.Setup();
   }
@@ -19,22 +20,19 @@ public class EnemyFacingWalkDirection : MonoBehaviour
   }
   private void Setup()
   {
-    this.isFacingRight = true;
-    this.previousPosition = this.transform.position;
+    this.target = GameObject.FindGameObjectWithTag("Player");
   }
 
   private void TrySetHorizontalRotation()
   {
-    if (this.previousPosition != transform.position)
+    if (target != null)
     {
-      Vector3 direction = (previousPosition - transform.position).normalized;
+      Vector3 direction = (transform.position - this.target.transform.position).normalized;
 
-      if (direction.x <= 0.1 && this.isFacingRight || direction.x >= 0.1 && !isFacingRight)
+      if (direction.x <= 0.05 && this.isFacingRight || direction.x >= 0.05 && !isFacingRight)
       {
         this.ToggleFlip();
       }
-
-      this.previousPosition = this.transform.position;
     }
   }
 

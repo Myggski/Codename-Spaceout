@@ -103,7 +103,7 @@ public class Pathfinding : Singleton<Pathfinding>
   /// </summary>
   /// <param name="path"></param>
   /// <returns></returns>
-	private Vector3[] SimplifyPath(List<Node> path)
+  private Vector3[] SimplifyPath(List<Node> path)
   {
     List<Vector3> waypoints = new List<Vector3>();
     Vector2 directionOld = Vector2.zero;
@@ -117,6 +117,7 @@ public class Pathfinding : Singleton<Pathfinding>
       }
       directionOld = directionNew;
     }
+
     return waypoints.ToArray();
   }
 

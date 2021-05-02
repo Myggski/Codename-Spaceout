@@ -17,21 +17,27 @@ public class PlayerEntity : Entity
   private GameEvent DamageTakenEvent;
   [SerializeField]
   private FloatReference health;
-  private DissolveObject dissolveObject;
 
   private void Awake()
   {
-    this.SetComponents();
+    this.SetHealth();
+  }
+
+  private void OnEnable()
+  {
+    this.SetHealth();
+  }
+
+  private void SetHealth()
+  {
+    this.dying = false;
+    this.currentHealth = this.maxHealth.Value;
+    this.health.Variable.Value = this.maxHealth.Value;
   }
 
   private void Update()
   {
     this.CheckHealth();
-  }
-
-  private void SetComponents()
-  {
-    this.dissolveObject = GetComponent<DissolveObject>();
   }
 
   private void CheckHealth()
@@ -40,16 +46,6 @@ public class PlayerEntity : Entity
     {
       this.health.Variable.SetValue(this.currentHealth);
     }
-  }
-
-  private void Died()
-  {
-    if (this.DeathEvent != null)
-    {
-      this.DeathEvent.Call();
-    }
-
-    Destroy(gameObject);
   }
 
   protected override void Hit()
@@ -62,15 +58,12 @@ public class PlayerEntity : Entity
 
   protected override void Die()
   {
-    this.Hit();
+    this.health.Variable.Value = 0f;
+    this.currentHealth = 0f;
 
-    if (this.dissolveObject != null)
+    if (this.DeathEvent != null)
     {
-      this.dissolveObject.StartDissolve(this.Died);
-    }
-    else
-    {
-      this.Died();
+      this.DeathEvent.Call();
     }
   }
 }

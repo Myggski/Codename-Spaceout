@@ -56,7 +56,7 @@ public class PlayerMover : Mover
         this.RunAnimation();
       }
 
-      this.previousPosition = this.rigidbody2D.position;
+      this.previousPosition = this.rb2d.position;
     }
     else
     {
@@ -132,6 +132,6 @@ public class PlayerMover : Mover
 
   private bool IsStandingStill()
   {
-    return (this.rigidbody2D.position - this.previousPosition).normalized.Equals(Vector2.zero);
+    return (this.rb2d.position - this.previousPosition).normalized.Equals(Vector2.zero);
   }
 }

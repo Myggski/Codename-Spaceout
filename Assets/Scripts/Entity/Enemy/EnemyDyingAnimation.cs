@@ -16,6 +16,7 @@ public class EnemyDyingAnimation : MonoBehaviour
 
   public void Dying()
   {
+    this.animator.SetBool("Running", false);
     this.animator.SetBool("Dying", true);
   }
 }

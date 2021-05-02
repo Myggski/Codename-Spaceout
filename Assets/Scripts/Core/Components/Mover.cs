@@ -10,7 +10,7 @@ abstract public class Mover : MonoBehaviour
 {
   [SerializeField]
   protected FloatReference movementSpeed;
-  protected new Rigidbody2D rigidbody2D;
+  protected Rigidbody2D rb2d;
 
   private void Awake()
   {
@@ -18,9 +18,15 @@ abstract public class Mover : MonoBehaviour
     this.SetMoreComponents();
   }
 
+  private void OnEnable()
+  {
+    this.SetComponents();
+    this.SetMoreComponents();
+  }
+
   private void SetComponents()
   {
-    this.rigidbody2D = GetComponent<Rigidbody2D>();
+    this.rb2d = GetComponent<Rigidbody2D>();
   }
 
   protected virtual void SetMoreComponents()
@@ -36,7 +42,7 @@ abstract public class Mover : MonoBehaviour
   {
     if (position != Vector3.zero)
     {
-      this.rigidbody2D.MovePosition(this.GetNextPosition(position));
+      this.rb2d.MovePosition(this.GetNextPosition(position));
     }
   }
 
@@ -47,7 +53,8 @@ abstract public class Mover : MonoBehaviour
   /// <param name="position"></param>
   protected void MoveTowards(Vector3 moveTowards)
   {
-    this.rigidbody2D.MovePosition(this.GetNextMoveTowardsPosition(moveTowards));
+    // TODO: Something sets this.rb2d to null, need to GetComponent directily until it's fixed
+    this.rb2d.MovePosition(this.GetNextMoveTowardsPosition(moveTowards));
   }
 
   /// <summary>
@@ -57,7 +64,7 @@ abstract public class Mover : MonoBehaviour
   /// <returns></returns>
   protected Vector3 GetNextPosition(Vector3 position)
   {
-    return this.rigidbody2D.position + (Vector2)(position * Time.fixedDeltaTime * this.movementSpeed);
+    return this.rb2d.position + (Vector2)(position * Time.fixedDeltaTime * this.movementSpeed);
   }
 
   /// <summary>

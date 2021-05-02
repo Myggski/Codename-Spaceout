@@ -18,7 +18,7 @@ public class ProjectileDamageDealer : MonoBehaviour
       entity.DealDamage(this.damage, this.transform.position);
       Destroy(this.gameObject);
     }
-    else if (collidedObject.GetComponent<CompositeCollider2D>() != null)
+    else if (collidedObject.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
     {
       Destroy(this.gameObject);
     }

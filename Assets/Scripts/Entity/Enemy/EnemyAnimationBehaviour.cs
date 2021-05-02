@@ -1,7 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using System.Linq;
 
+/// <summary>
+/// This script makes the enemy more alive
+/// It randomly changes Idle-states after a certain amount of time
+/// </summary>
 public class EnemyAnimationBehaviour : StateMachineBehaviour
 {
   [SerializeField]
@@ -10,7 +13,13 @@ public class EnemyAnimationBehaviour : StateMachineBehaviour
   private float animationPlaytime;
   private int lastPlayed;
 
-  // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+  /// <summary>
+  /// Sets the next random animation, and when it should play
+  /// animationPlaytime = animation playtime length * random number of times its going to repeat
+  /// </summary>
+  /// <param name="animator"></param>
+  /// <param name="stateInfo"></param>
+  /// <param name="layerIndex"></param>
   public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
     if (this.IsCurrentAnimationDefault(animator, layerIndex))
@@ -18,11 +27,11 @@ public class EnemyAnimationBehaviour : StateMachineBehaviour
       this.animationPlaytime = this.animationVariationModel.defaultAnimation.length * Random.Range(this.animationVariationModel.Min, this.animationVariationModel.Max);
       this.nextAnimation = this.GetNextAnimation();
     }
-    else
+    else if (animator.GetCurrentAnimatorClipInfo(layerIndex).Length > 0)
     {
       AnimationVariant currentAnimation = this.GetAnimationVariantByHashCode(animator, layerIndex);
 
-      if (!currentAnimation.Equals(null))
+      if (!currentAnimation.Equals(null) && currentAnimation.animationClip != null)
       {
         this.animationPlaytime = currentAnimation.animationClip.length * Random.Range(currentAnimation.Min, currentAnimation.Max);
       }
@@ -31,14 +40,28 @@ public class EnemyAnimationBehaviour : StateMachineBehaviour
         this.PlayDefaultAnimation(animator);
       }
     }
+    else
+    {
+      this.PlayDefaultAnimation(animator);
+    }
   }
 
-  // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+  /// <summary>
+  /// When the playtime of the current animation is zero or less it changes animation
+  /// </summary>
+  /// <param name="animator"></param>
+  /// <param name="stateInfo"></param>
+  /// <param name="layerIndex"></param>
   public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
+    if (animator.GetCurrentAnimatorClipInfo(layerIndex).Length == 0)
+    {
+      return;
+    }
+
     if (this.animationPlaytime <= 0)
     {
-      if (this.IsCurrentAnimationDefault(animator, layerIndex))
+      if (this.IsCurrentAnimationDefault(animator, layerIndex) && !this.nextAnimation.animationClip.Equals(null))
       {
         animator.Play(this.GetHashCodeByName(this.nextAnimation.animationClip.name));
       }
@@ -51,26 +74,52 @@ public class EnemyAnimationBehaviour : StateMachineBehaviour
     this.animationPlaytime -= Time.deltaTime;
   }
 
+  /// <summary>
+  /// Randomly selects the next animation to play
+  /// </summary>
+  /// <returns></returns>
   private AnimationVariant GetNextAnimation()
   {
-    return animationVariationModel.animationVariants[Random.Range(0, animationVariationModel.animationVariants.Count)];
+    AnimationVariant animationVariant = animationVariationModel.animationVariants[Random.Range(0, animationVariationModel.animationVariants.Count)];
+    return animationVariant;
   }
 
+  /// <summary>
+  /// Checks to see if the enemy is playing the default idle-animation
+  /// </summary>
+  /// <param name="animator"></param>
+  /// <param name="layerIndex"></param>
+  /// <returns></returns>
   private bool IsCurrentAnimationDefault(Animator animator, int layerIndex)
   {
-    return animator.GetCurrentAnimatorClipInfo(layerIndex)[0].clip.Equals(this.animationVariationModel.defaultAnimation);
+    return animator.GetCurrentAnimatorClipInfo(layerIndex).Length == 0 || animator.GetCurrentAnimatorClipInfo(layerIndex)[0].clip == null || (animator.GetCurrentAnimatorClipInfo(layerIndex).Length > 0 && animator.GetCurrentAnimatorClipInfo(layerIndex)[0].clip.Equals(this.animationVariationModel.defaultAnimation));
   }
 
+  /// <summary>
+  /// Gets the animation by name
+  /// </summary>
+  /// <param name="name"></param>
+    /// <returns></returns>
   private int GetHashCodeByName(string name)
   {
     return Animator.StringToHash($"Base Layer.{name}");
   }
 
+  /// <summary>
+  /// Finds the animation from the model by name
+  /// </summary>
+  /// <param name="animator"></param>
+  /// <param name="layerIndex"></param>
+  /// <returns></returns>
   private AnimationVariant GetAnimationVariantByHashCode(Animator animator, int layerIndex)
   {
-    return this.animationVariationModel.animationVariants.Find(x => x.animationClip.name == animator.GetCurrentAnimatorClipInfo(layerIndex)[0].clip.name);
+    return this.animationVariationModel.animationVariants.FirstOrDefault(x => x.animationClip.name == animator.GetCurrentAnimatorClipInfo(layerIndex)[0].clip.name);
   }
 
+  /// <summary>
+  /// Plays the default animation
+  /// </summary>
+  /// <param name="animator"></param>
   private void PlayDefaultAnimation(Animator animator)
   {
     animator.Play(this.GetHashCodeByName(this.animationVariationModel.defaultAnimation.name));

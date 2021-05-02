@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections;
 
 [
     RequireComponent(typeof(Rigidbody2D))
@@ -15,7 +15,10 @@ public class KnockbackOnHit : MonoBehaviour
   [Tooltip("Number of seconds until the knockback stops")]
   private float knockbackDuration;
 
-  private new Rigidbody2D rigidbody2D;
+  [SerializeField]
+  private UnityEvent knocked;
+
+  private Rigidbody2D rb2d;
 
   private Coroutine knockbackCoroutine;
 
@@ -26,17 +29,24 @@ public class KnockbackOnHit : MonoBehaviour
 
   private void SetComponents()
   {
-    this.rigidbody2D = GetComponent<Rigidbody2D>();
+    this.rb2d = GetComponent<Rigidbody2D>();
   }
 
   private IEnumerator Knockback(Vector2 hitFromPosition)
   {
+    yield return new WaitForEndOfFrame();
+
     Vector2 direction = ((Vector2)this.transform.position - hitFromPosition).normalized;
-    this.rigidbody2D.AddForce((direction * this.knockbackForce) * Time.deltaTime, ForceMode2D.Impulse);
+    this.rb2d.AddForce((direction * this.knockbackForce) * Time.deltaTime, ForceMode2D.Impulse);
 
     yield return new WaitForSeconds(this.knockbackDuration);
 
-    this.rigidbody2D.velocity = Vector2.zero;
+    this.rb2d.velocity = Vector2.zero;
+
+    if (this.knocked != null)
+    {
+      this.knocked.Invoke();
+    }
   }
 
   public void StartKnockback(Vector2 hitFromPosition)
@@ -44,7 +54,7 @@ public class KnockbackOnHit : MonoBehaviour
     if (this.knockbackCoroutine != null)
     {
       StopCoroutine(this.knockbackCoroutine);
-      this.rigidbody2D.velocity = Vector2.zero;
+      this.rb2d.velocity = Vector2.zero;
     }
 
     this.knockbackCoroutine = StartCoroutine(this.Knockback(hitFromPosition));

@@ -33,6 +33,11 @@ public class GunShooter : MonoBehaviour
     }
   }
 
+  /// <summary>
+  /// Changes the projectile and muzzle flash of the gun
+  /// </summary>
+  /// <param name="projectilePrefab"></param>
+  /// <param name="muzzleFlashPrefab"></param>
   public void Setup(GameObject projectilePrefab, GameObject muzzleFlashPrefab)
   {
     this.projectilePrefab = projectilePrefab;
@@ -60,8 +65,7 @@ public class GunShooter : MonoBehaviour
   }
 
   /// <summary>
-  /// Finding the position of the gun barrel (top right of the weapon sprite).
-  /// The projectile spawns at the pivot of the gun-sprite, so it has to be moved to the tip of the gunbarrel.
+  /// This method calculates and finds the position of the gun barrel (top right of the weapon sprite).
   /// </summary>
   private void SpawnProjectile()
   {
@@ -95,6 +99,6 @@ public class GunShooter : MonoBehaviour
 
   private bool HasSprite()
   {
-    return this.spriteRenderer.sprite != null;
+    return this.spriteRenderer != null && this.spriteRenderer.sprite != null;
   }
 }

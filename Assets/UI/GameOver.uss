@@ -1,0 +1,55 @@
+.menu-button {
+    background-image: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 38px;
+    height: 16px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.quit-button {
+    background-image: url('/Assets/Sprites/UI/quit-button-ui.png#quit-button-ui_0');
+    height: 32px;
+    width: 60px;
+}
+
+.quit-button:active {
+    background-image: url('/Assets/Sprites/UI/quit-button-ui.png#quit-button-ui_1');
+}
+
+.retry-button {
+    background-image: url('/Assets/Sprites/UI/retry-button-ui.png#retry-button-ui_0');
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0);
+    background-color: rgba(45, 33, 46, 0);
+    height: 32px;
+    width: 112px;
+    margin-bottom: 8px;
+}
+
+.retry-button:active {
+    background-image: url('/Assets/Sprites/UI/retry-button-ui.png#retry-button-ui_1');
+}
+
+.text {
+    -unity-font: url('/Assets/UI/Silver.ttf');
+    color: rgba(255, 255, 255, 255);
+    font-size: 24px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

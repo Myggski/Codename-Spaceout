@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: P1 - Health
   m_EditorClassIdentifier: 
   DeveloperDescription: The current health of a player
-  Value: 3
+  Value: -5

@@ -8,12 +8,13 @@ using System.Collections.Generic;
 public class PlayerHealthDisplayer : MonoBehaviour
 {
   [SerializeField]
-  private FloatVariable playerHealth;
-  private VisualElement healthbar;
-  private List<VisualElement> hearts = new List<VisualElement>();
-  private float currentDisplayedNumberOfHealth;
+  private FloatVariable playerCurrentHealth;
+  [SerializeField]
+  private FloatVariable playerMaxHealth;
+  private UIDocument document;
+  private Label currentHealthText;
 
-  private void Start()
+  private void Awake()
   {
     this.SetComponents();
     this.Setup();
@@ -26,17 +27,20 @@ public class PlayerHealthDisplayer : MonoBehaviour
 
   private void SetComponents()
   {
-    this.healthbar = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("health-bar");
+    this.document = GetComponent<UIDocument>();
   }
 
-  /// <summary>
-  /// Add hearts to the UI
-  /// </summary>
   private void Setup()
   {
-    this.currentDisplayedNumberOfHealth = this.playerHealth.Value;
+    VisualElement wrapper = this.document.rootVisualElement.Q<VisualElement>("health-wrapper");
+    this.currentHealthText = wrapper.Q<Label>("current-health");
 
-    this.AddNumberOfHearts(Mathf.RoundToInt(this.currentDisplayedNumberOfHealth));
+    this.SetHealth();
+  }
+
+  private void SetHealth()
+  {
+    this.currentHealthText.text = this.playerCurrentHealth.ToString();
   }
 
   /// <summary>
@@ -44,69 +48,24 @@ public class PlayerHealthDisplayer : MonoBehaviour
   /// </summary>
   private void CheckForHealthChanges()
   {
-    if (!this.currentDisplayedNumberOfHealth.Equals(this.playerHealth.Value))
+    if (this.currentHealthText.text != this.playerCurrentHealth.ToString())
     {
-      int diffrence = Mathf.RoundToInt(this.playerHealth.Value - this.currentDisplayedNumberOfHealth);
-      this.currentDisplayedNumberOfHealth += diffrence;
-
-      if (diffrence > 0)
+      if (this.playerCurrentHealth.Value > 0)
       {
-        this.AddNumberOfHearts(diffrence);
+        this.currentHealthText.text = this.playerCurrentHealth.ToString();
       }
-      else if (diffrence < 0)
+      else
       {
-        this.RemoveNumberOfHearts(Mathf.Abs(diffrence));
+        this.currentHealthText.text = "0";
       }
     }
   }
 
   /// <summary>
-  /// Adds number of hearts
+  /// TODO: Move this to another component, this component should only display values
   /// </summary>
-  /// <param name="numberOfHearts"></param>
-  private void AddNumberOfHearts(int numberOfHearts)
+  public void ResetHealth()
   {
-    for (var i = 0; i < numberOfHearts; i++)
-    {
-      this.AddHeart();
-    }
-  }
-
-  /// <summary>
-  /// Removes number of hearts
-  /// </summary>
-  /// <param name="numberOfHearts"></param>
-  private void RemoveNumberOfHearts(int numberOfHearts)
-  {
-    for (var i = 0; i < numberOfHearts; i++)
-    {
-      this.RemoveHeart();
-    }
-  }
-
-  /// <summary>
-  /// Adds a heart icon in the UI
-  /// </summary>
-  private void AddHeart()
-  {
-    VisualElement heartClone = new VisualElement();
-    heartClone.AddToClassList("heart-icon");
-
-    this.healthbar.Add(heartClone);
-    this.hearts.Add(heartClone);
-  }
-
-  /// <summary>
-  /// Removes a heart icon in the UI
-  /// </summary>
-  private void RemoveHeart()
-  {
-    if (this.hearts.Count > 0)
-    {
-      VisualElement heart = this.hearts[this.hearts.Count - 1];
-
-      this.healthbar.Remove(heart);
-      this.hearts.Remove(heart);
-    }
+    this.playerCurrentHealth.Value = this.playerMaxHealth.Value;
   }
 }

@@ -1,15 +1,63 @@
-.heart-icon {
-    background-image: url('/Assets/Sprites/UI/heart-ui.png#heart-ui');
-    width: 14px;
-    height: 14px;
-    margin-left: 0;
-    margin-right: 4px;
+.health-wrapper {
+    margin-left: 8px;
+    margin-top: 8px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
-.health-bar {
-    margin-top: 8px;
-    margin-left: 8px;
-    flex-shrink: 0;
+.health-icon {
+    background-image: url('/Assets/Sprites/UI/health-count-ui.png#health-count-ui');
+    width: auto;
+    height: 16px;
+    min-width: 45px;
+    align-items: center;
+}
+
+.health-text-wrapper {
+    align-items: center;
     flex-direction: row;
-    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.current-health {
+    font-size: 15px;
+    -unity-font: url('/Assets/UI/Silver.ttf');
+    color: rgb(255, 255, 255);
+    padding-left: 18px;
+    padding-top: 7px;
+    padding-bottom: 6px;
+    padding-right: 0;
+    bottom: -2px;
+    height: 16px;
+    -unity-text-align: middle-left;
+}
+
+.seperator {
+    font-size: 12px;
+    -unity-font: url('/Assets/UI/Silver.ttf');
+    color: rgb(255, 255, 255);
+    padding-left: 0;
+    padding-top: 7px;
+    padding-bottom: 6px;
+    padding-right: 0;
+    bottom: -1px;
+    height: 11px;
+    -unity-text-align: middle-left;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 1px;
+}
+
+.max-health {
+    font-size: 15px;
+    -unity-font: url('/Assets/UI/Silver.ttf');
+    color: rgb(255, 255, 255);
+    padding-left: 1px;
+    padding-top: 7px;
+    padding-bottom: 6px;
+    padding-right: 4px;
+    bottom: -2px;
+    height: 16px;
+    -unity-text-align: middle-left;
 }

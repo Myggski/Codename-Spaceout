@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 [
   RequireComponent(typeof(SpriteRenderer))
@@ -8,12 +9,13 @@ public class DissolveObject : MonoBehaviour
 {
   [SerializeField]
   private Material dissolveMaterial;
-  private SpriteRenderer spriteRenderer;
+  protected SpriteRenderer spriteRenderer;
   private float activeFadeDuration;
-  private const string materialParameterName = "_Fade";
+  protected float defaultFadeValue;
+  protected const string materialParameterName = "_Fade";
   public event Action hasDissolvedAction;
 
-  private void Start()
+  private void Awake()
   {
     this.SetComponents();
   }
@@ -21,11 +23,6 @@ public class DissolveObject : MonoBehaviour
   private void Update()
   {
     this.Dissolve();
-  }
-
-  private void OnDestroy()
-  {
-    this.RemoveAllEvents();
   }
 
   private void SetComponents()
@@ -44,6 +41,7 @@ public class DissolveObject : MonoBehaviour
     if (!this.dissolveMaterial.Equals(null))
     {
       this.spriteRenderer.material = this.dissolveMaterial;
+      this.defaultFadeValue = this.spriteRenderer.material.GetFloat(DissolveObject.materialParameterName);
       this.activeFadeDuration = this.spriteRenderer.material.GetFloat(DissolveObject.materialParameterName);
 
       foreach (Action action in actions)
@@ -63,18 +61,6 @@ public class DissolveObject : MonoBehaviour
       if (this.activeFadeDuration <= 0f)
       {
         this.hasDissolvedAction.Invoke();
-        this.RemoveAllEvents();
-      }
-    }
-  }
-
-  private void RemoveAllEvents()
-  {
-    if (this.hasDissolvedAction != null)
-    {
-      foreach (Delegate d in this.hasDissolvedAction.GetInvocationList())
-      {
-        this.hasDissolvedAction -= (Action)d;
       }
     }
   }

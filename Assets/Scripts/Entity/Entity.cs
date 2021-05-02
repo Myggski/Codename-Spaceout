@@ -9,6 +9,7 @@ public abstract class Entity : MonoBehaviour, IEntity
   [SerializeField]
   protected FloatReference maxHealth;
   protected float currentHealth;
+  protected bool dying;
 
   /// <summary>
   /// The entity is dead if it has zero or less health
@@ -20,12 +21,43 @@ public abstract class Entity : MonoBehaviour, IEntity
   /// Despawning the entity if the entity is killed
   /// </summary>
   /// <param name="damage">The damage taken</param>
-  public void DealDamage(float damage, Vector2 hitFromPosition)
+  public void DealDamage(float damage)
   {
+    if (this.dying)
+    {
+      return;
+    }
+
     this.currentHealth -= damage;
 
     if (Dead)
     {
+      dying = true;
+      this.Die();
+    }
+    else
+    {
+      this.Hit();
+    }
+  }
+
+  /// <summary>
+  /// When the entity is getting hit, it loses health
+  /// Despawning the entity if the entity is killed
+  /// </summary>
+  /// <param name="damage">The damage taken</param>
+  public void DealDamage(float damage, Vector2 hitFromPosition)
+  {
+    if (this.dying)
+    {
+      return;
+    }
+
+    this.currentHealth -= damage;
+
+    if (Dead)
+    {
+      this.dying = true;
       this.Die(hitFromPosition);
     }
     else

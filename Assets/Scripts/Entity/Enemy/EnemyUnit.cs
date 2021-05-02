@@ -2,16 +2,49 @@ using UnityEngine;
 using System.Collections;
 public class EnemyUnit : EnemyMover
 {
-  public Transform target;
-  Vector3[] path;
-  int targetIndex;
+  private GameObject target;
+  private Vector3[] path;
+  private Vector3 prevoiusPosition;
+  private int targetIndex;
+  private float pathFindingDelay;
+  private Coroutine pathfindingCoutine;
+  private bool disabledWalk;
 
-  void Update()
+  private int numberOfTimesSamePosition;
+
+  private void Update()
   {
-    /*if (Input.GetKeyDown(KeyCode.Mouse0))
+    if (pathFindingDelay > 1.25f)
     {
-      PathRequestManager.Instance.RequestPath(new PathRequest(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), OnPathFound));
-    }*/
+      this.FindPath();
+      this.pathFindingDelay = 0f;
+    }
+    else
+    {
+      this.pathFindingDelay += Time.deltaTime;
+    }
+  }
+
+  private void FindPath()
+  {
+    if (this.target == null)
+    {
+      this.FindTarget();
+    }
+
+    if (this.target != null && !this.disabledWalk)
+    {
+      PathRequestManager.Instance.RequestPath(new PathRequest(this.transform.position, this.target.transform.position, this.OnPathFound));
+    }
+    else
+    {
+      this.Idle();
+    }
+  }
+
+  private void FindTarget()
+  {
+    target = GameObject.FindGameObjectWithTag("Player");
   }
 
   public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -19,8 +52,13 @@ public class EnemyUnit : EnemyMover
     if (pathSuccessful)
     {
       path = newPath;
-      StopCoroutine("FollowPath");
-      StartCoroutine("FollowPath");
+
+      if (pathfindingCoutine != null)
+      {
+        StopCoroutine(this.pathfindingCoutine);
+      }
+
+      this.pathfindingCoutine = StartCoroutine(this.FollowPath());
     }
   }
 
@@ -44,10 +82,23 @@ public class EnemyUnit : EnemyMover
         currentWaypoint = path[targetIndex];
       }
 
+      if (!target.activeSelf)
+      {
+        this.Idle();
+        yield break;
+      }
+
       this.Run(currentWaypoint);
+      this.prevoiusPosition = this.transform.position;
 
       yield return null;
     }
+  }
+
+  public void StopFollow()
+  {
+    StopCoroutine(this.pathfindingCoutine);
+    this.disabledWalk = true;
   }
 
   private void OnDrawGizmos()

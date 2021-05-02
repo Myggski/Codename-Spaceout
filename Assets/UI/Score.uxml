@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="Score-style.uss" />
     <ui:VisualElement name="kill-wrapper" class="kill-wrapper">
-        <ui:VisualElement name="kill-icon" class="kill-icon" />
-        <ui:VisualElement name="kill-icon-scored" class="kill-icon" style="display: none;" />
-        <ui:Label text="0" display-tooltip-when-elided="true" name="kill-text" class="kill-text" style="-unity-font-definition: resource(&apos;Fonts &amp; Materials/LiberationSans SDF&apos;);" />
+        <ui:VisualElement name="kill-icon" class="kill-icon" style="min-width: 38px;">
+            <ui:Label text="000&#10;" display-tooltip-when-elided="true" name="kill-text" enable-rich-text="true" class="kill-text killer-text" style="min-width: 41px;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

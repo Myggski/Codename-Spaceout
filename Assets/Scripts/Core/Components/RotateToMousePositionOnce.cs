@@ -2,6 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Rotates the gameObject to the mouse position when instantiated
+/// Example: Projectiles
 /// </summary>
 public class RotateToMousePositionOnce : MonoBehaviour
 {

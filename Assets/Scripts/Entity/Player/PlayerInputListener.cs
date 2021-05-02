@@ -4,41 +4,18 @@ using System.Linq;
 using System.Collections.Generic;
 
 /// <summary>
-/// KeyCode = What key that's being watched
-/// InputKeyAction = Has a GameEvent that will trigger when it's pressed.
-/// It can also contain a list of InputGroupTags
-/// KeyPressType = What kind of keypress that's being watched
-/// For example Hold, pressed, or released
+/// Checks if any of the requested inputs is being pressed, if so, it trigger the connected GameEvent.
+/// But if the requested input is included in the disabledInputGroupsTag, it should not be triggered
 /// </summary>
-[Serializable]
-public struct KeyAction
+public class PlayerInputListener : MonoBehaviour
 {
-  public KeyCode KeyCode;
-  public InputKeyAction InputKeyAction;
-  public KeyPressActionType KeyPressType;
-}
+  [SerializeField]
+  [Tooltip("A list of keyCodes with categorizations and a key pressing type")]
+  private KeyAction[] keyActions;
 
-/// <summary>
-/// KeyPressActionType is what type of keypress that's beeing watched
-/// KeyHold = Triggers event if the key is held down
-/// KeyDown = Triggers once, when the key is pressed down
-/// KeyUp = Triggers once, when the key is released
-/// </summary>
-public enum KeyPressActionType
-{
-  KeyHold,
-  KeyDown,
-  KeyUp
-}
-
-/// <summary>
-/// Watches if any required inputs has been pressed.
-/// If any required keys is being pressed, and is not included in the disabledInputGroupTags, it will trigger the connected GameEvent.
-/// </summary>
-public class PlayerInputWatcher : MonoBehaviour
-{
-  public KeyAction[] keyActions;
-
+  // A list of input categorizations
+  // Example of categorization names: Movement, Character Action, UI Action, 
+  // For example keyCodes that has to do with movement can have InputGroupTag Movement.
   private List<InputGroupTag> disabledInputGroupTags = new List<InputGroupTag>();
 
   private void Update()
@@ -94,4 +71,32 @@ public class PlayerInputWatcher : MonoBehaviour
   {
     this.disabledInputGroupTags.Remove(inputGroupTag);
   }
+}
+
+/// <summary>
+/// KeyCode = What key that's being watched
+/// InputKeyAction = Has a GameEvent that will trigger when it's pressed.
+/// It can also contain a list of InputGroupTags
+/// KeyPressType = What kind of keypress that's being watched
+/// For example Hold, pressed, or released
+/// </summary>
+[Serializable]
+public struct KeyAction
+{
+  public KeyCode KeyCode;
+  public InputKeyAction InputKeyAction;
+  public KeyPressActionType KeyPressType;
+}
+
+/// <summary>
+/// KeyPressActionType is what type of keypress that's beeing watched
+/// KeyHold = Triggers event if the key is held down
+/// KeyDown = Triggers once, when the key is pressed down
+/// KeyUp = Triggers once, when the key is released
+/// </summary>
+public enum KeyPressActionType
+{
+  KeyHold,
+  KeyDown,
+  KeyUp
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Prime Flux - Gun
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 86433ce169f2add4590f163171e369ec, type: 3}
-  fireRateInSeconds: 0.25
+  fireRateInSeconds: 0.3
   gunBarrelYCenterPositionInPixels: -3.5
   recoilDegrees: 90
   recoilDuration: 0.2
